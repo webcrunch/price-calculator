@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu caclcuating price</title>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #clear {
+            margin-left: 20px;
+        }
+
+
+        #clear:hover {
+            background-color: #d32f2f;
+            /* Mörkröd */
+        }
+
+        #item-list {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        #item-list li {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+
+
+        #item-list li:hover {
+            text-decoration: line-through;
+        }
+
+        .container {
+            padding: 0 40px;
+
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .button {
+            padding: 25px 32px;
+            margin: 5px;
+
+        }
+
+        .button {
+            background-color: red;
+            border: none;
+            color: yellow;
+            /* padding: 15px 32px; */
+            padding: 25px 32px;
+            /* Större padding */
+
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button_R {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+
+        .button_A {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /* Mindre skärmar */
+        @media (max-width: 600px) {
+            .button-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .button {
+                padding: 20px;
+
+            }
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <!-- <script src="script.js" defer></script> -->
+</head>
+
+<body>
+
+</body>
+
+</html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <div class="container">
+        <div class="button-container">
+            <button class="button" value="118">Pechopak (without Rice)</button>
+            <button class="button" value="128">Pechopak (with Rice)</button>
+            <button class="button" value="98">Paa (Without rice)</button>
+            <button class="button" value="108">Paa (With rice)</button>
+            <button class="button" value="38">Chicken Wings / PC (Without Rice) </button>
+            <button class="button" value="88">Chicken Wing 2 PC (With Rice)</button>
+            <button class="button" value="32">Pork Barbeque / PC (Without rice)</button>
+            <button class="button" value="78">Pork Barbeque 2 PC (With Rice) </button>
+            <button class="button" value="118">Grilled bangus (Without Rice) </button>
+            <button class="button" value="128">Grilled Bangus (with Rice)</button>
+            <button class="button" value="28">Pork Masskara / PC (Without rice)</button>
+            <button class="button" value="68">Pork Masskara 2 PC (With rice)</button>
+            <button class="button" value="18">Isaw / PC (Without Rice) </button>
+            <button class="button" value="48">Isaw 2 PC (With Rice)</button>
+            <button class="button" value="32">Atay / PC (Without rice)</button>
+            <button class="button" value="78">Atay 2 PC (With Rice) </button>
+            <button class="button" value="299">Inasal Pechopak Overload </button>
+            <button class="button" value="299">Inasal Paa Overload</button>
+            <button class="button" value="15">Extra Rice - Plain </button>
+            <button class="button" value="18">Extra Rice - Java </button>
+        </div>
+
+
+        <div class="button-container" id="order-list">
+            <h2>Item choosed:</h2>
+            <ul id="item-list"></ul>
+        </div>
+
+        <div class="button-container">
+            <p id="total">Totally: 0 ₱</p>
+            <button id="clear">Clear order</button>
+            <button id="order"> Order</button>
+        </div>
+    </div>
+    <script>
+
+
+        let total = 0;
+        let priceArray = []
+        const totalElement = document.getElementById('total');
+        const itemList = document.getElementById('item-list');
+
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', event => {
+                priceArray.push({ "item": event.target.innerText, "price": event.target.value })
+                displayItemList()
+            });
+        });
+
+        const removeItemsFromArray = (e) => {
+            priceArray.splice(e, 1)
+            displayItemList()
+        }
+
+        const displayItemList = () => {
+            itemList.innerHTML = ""
+
+            priceArray.map((item, i) => {
+                const listItem = document.createElement('li');
+                listItem.id = i
+                listItem.innerText = item.item + " (" + item.price + ") ₱";
+                listItem.addEventListener('click', function () {
+                    removeItemsFromArray(this.id);
+                });
+                itemList.appendChild(listItem);
+            });
+            setPrice()
+
+        }
+
+
+        document.getElementById('order').addEventListener('click', () => {
+            const savedData = JSON.parse(localStorage.getItem('OrderHistory'));
+            const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
+            const savedArrayData = [{ "totalPrice": totalPrice, "items": priceArray }]
+            let addOrderHistoryArry;
+            savedData !== null ? addOrderHistoryArry = [...savedArrayData, savedData] : addOrderHistoryArry = savedArrayData
+            console.log(savedArrayData)
+            localStorage.setItem('OrderHistory', JSON.stringify(addOrderHistoryArry));
+            priceArray = []
+            displayItemList()
+
+        });
+
+        document.getElementById('clear').addEventListener('click', () => {
+            priceArray = []
+            displayItemList()
+        });
+
+        const setPrice = () => {
+            let total = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
+            totalElement.innerText = 'Totally: ' + total + " ₱";
+        }
+
+    </script>
+
+</body>
+
+</html>
