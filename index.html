@@ -12,6 +12,11 @@
             padding: 20px;
         }
 
+
+        h1 {
+            text-align: center;
+        }
+
         #clear {
             margin-left: 20px;
         }
@@ -132,6 +137,8 @@
 </head>
 
 <body>
+
+    <h1>Ns' Taste of Bacolod Menu</h1>
     <div class="container">
         <div class="button-container">
             <button class="button" value="118">Pechopak (without Rice)</button>
@@ -163,7 +170,9 @@
         </div>
 
         <div class="button-container">
-            <p id="total">Totally: 0 ₱</p>
+            <p id="total">Total: 0 ₱</p>
+            Customer payment: <input type="number" id="customerPayment" />
+            <p id="change">Payment back to customer: 0 ₱</p>
             <button id="clear">Clear order</button>
             <button id="order"> Order</button>
         </div>
@@ -175,6 +184,8 @@
         let priceArray = []
         const totalElement = document.getElementById('total');
         const itemList = document.getElementById('item-list');
+        const paymentElement = document.getElementById('customerPayment');
+        const changeElement = document.getElementById('change');
 
         document.querySelectorAll('.button').forEach(button => {
             button.addEventListener('click', event => {
@@ -209,13 +220,27 @@
             const savedData = JSON.parse(localStorage.getItem('OrderHistory'));
             const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
             const savedArrayData = [{ "totalPrice": totalPrice, "items": priceArray }]
+
+
             let addOrderHistoryArry;
             savedData !== null ? addOrderHistoryArry = [...savedArrayData, savedData] : addOrderHistoryArry = savedArrayData
-            console.log(savedArrayData)
             localStorage.setItem('OrderHistory', JSON.stringify(addOrderHistoryArry));
             priceArray = []
             displayItemList()
 
+        });
+
+
+        paymentElement.addEventListener('input', function () {
+            // Hämta värdena
+            const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
+            let payment = parseInt(paymentElement.value);
+
+            // Utför beräkningen
+            let change = payment - totalPrice < 0 ? 0 : payment - totalPrice;
+
+            // Uppdatera texten i det andra elementet
+            changeElement.textContent = 'Payment back to customer: ' + change + ' ₱';
         });
 
         document.getElementById('clear').addEventListener('click', () => {
