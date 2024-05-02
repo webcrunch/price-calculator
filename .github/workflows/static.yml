@@ -43,7 +43,6 @@
 #       - name: Deploy to GitHub Pages
 #         id: deployment
 #         uses: actions/deploy-pages@v4
-
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
@@ -76,7 +75,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || (github.event_name == 'pull_request_review' && github.event.action == 'submitted' && github.event.review.state == 'approved' && steps.pr.outputs.branch == 'main')
     steps:
       - name: Check PR branch
         id: pr
@@ -84,16 +82,20 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        if: github.event_name == 'push' || (github.event_name == 'pull_request_review' && github.event.action == 'submitted' && github.event.review.state == 'approved' && steps.pr.outputs.branch == 'main')
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        if: github.event_name == 'push' || (github.event_name == 'pull_request_review' && github.event.action == 'submitted' && github.event.review.state == 'approved' && steps.pr.outputs.branch == 'main')
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: "."
+        if: github.event_name == 'push' || (github.event_name == 'pull_request_review' && github.event.action == 'submitted' && github.event.review.state == 'approved' && steps.pr.outputs.branch == 'main')
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        if: github.event_name == 'push' || (github.event_name == 'pull_request_review' && github.event.action == 'submitted' && github.event.review.state == 'approved' && steps.pr.outputs.branch == 'main')
