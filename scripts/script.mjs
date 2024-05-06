@@ -6,7 +6,7 @@ const itemList = document.getElementById('item-list');
 const paymentElement = document.getElementById('customerPayment');
 const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
-
+const savedArrayData = []
 
 
 const setPrice = () => {
@@ -70,11 +70,11 @@ const init = () => {
     document.getElementById('order').addEventListener('click', () => {
         const savedData = JSON.parse(localStorage.getItem('OrderHistory'));
         const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
-        const savedArrayData = [{ "totalPrice": totalPrice, "items": priceArray }]
-
+        savedArrayData.push({ date: new Date().toJSON().slice(0, 10), "totalPrice": totalPrice, "items": priceArray })
+        // console.log(savedArrayData, totalPrice, savedArrayData)
         let addOrderHistoryArry;
-        savedData !== null ? addOrderHistoryArry = [...savedArrayData, savedData] : addOrderHistoryArry = savedArrayData
-        localStorage.setItem('OrderHistory', JSON.stringify(addOrderHistoryArry));
+        // savedData !== null ? addOrderHistoryArry = [...savedArrayData, savedData] : addOrderHistoryArry = savedArrayData
+        localStorage.setItem('OrderHistory', JSON.stringify(savedArrayData));
         priceArray = []
         displayItemList()
     });
