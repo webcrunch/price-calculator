@@ -54,6 +54,19 @@ const displayButtions = () => {
     });
 }
 
+// Asynkron funktion för att hämta data från ett externt API
+async function fetchData() {
+    try {
+        const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
+        const data = await response.json();
+        // Gör något med data här
+        console.log(data);
+    } catch (error) {
+        console.error('Det gick inte att hämta data:', error);
+    }
+    init()
+}
+
 
 const init = () => {
 
@@ -98,4 +111,4 @@ const init = () => {
 
 }
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', fetchData);
