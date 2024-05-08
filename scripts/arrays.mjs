@@ -1,25 +1,4 @@
-// Din js-fil
-// let buttonArray1 = [];
 
-// fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons')
-//     .then(response => response.json())
-//     .then(json => {
-//         console.log(json)
-//         buttonArray1 = json;
-//     })
-//     .catch(error => console.error('Error:', error));
-
-// async function logMovies() {
-//     const response = await fetch("https://backend-price.netlify.app/.netlify/functions/api/buttons");
-//     const movies = await response.json();
-//     console.log(movies);
-// }
-
-
-// logMovies()
-// // export { buttonArray };
-
-// export { buttonArray };
 export const buttonArray = [
     { "name": "Pechopak (without Rice)", "price": 120 },
     { "name": "Pechopak (with Rice)", "price": 128 },
