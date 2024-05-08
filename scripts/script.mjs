@@ -7,6 +7,7 @@ const paymentElement = document.getElementById('customerPayment');
 const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
 const savedArrayData = []
+const buttonArray_Fetch = []
 
 
 const setPrice = () => {
@@ -36,7 +37,8 @@ const displayItemList = () => {
 
 const displayButtions = () => {
     // Loopa igenom arrayen
-    buttonArray.forEach(item => {
+    let buttonA = buttonArray_Fetch.length > 0 ? buttonArray_Fetch : buttonArray
+    buttonA.forEach(item => {
         // Skapa en ny knapp
         const button = document.createElement('button');
 
