@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar a {
+                float: none;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        .order-container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="/index.html">Home</a>
+        <a href="/history.html">History</a>
+    </div>
+
+    <div id="orders"></div>
+    <div id="total"></div>
+    <div id="items"></div>
+
+    <script>
+        var orders = [{ "date": "2024-05-06", "totalPrice": 216, "items": [{ "item": "Paa (With rice)", "price": "108" }, { "item": "Paa (With rice)", "price": "108" }] }, { "date": "2024-05-06", "totalPrice": 84, "items": [{ "item": "Pork Masskara / PC (Without rice)", "price": "28" }, { "item": "Pork Masskara / PC (Without rice)", "price": "28" }, { "item": "Pork Masskara / PC (Without rice)", "price": "28" }] }, { "date": "2024-05-06", "totalPrice": 108, "items": [{ "item": "Isaw / PC (Without Rice)", "price": "18" }, { "item": "Isaw / PC (Without Rice)", "price": "18" }, { "item": "Isaw / PC (Without Rice)", "price": "18" }, { "item": "Isaw / PC (Without Rice)", "price": "18" }, { "item": "Isaw / PC (Without Rice)", "price": "18" }, { "item": "Isaw / PC (Without Rice)", "price": "18" }] }, { "date": "2024-05-06", "totalPrice": 128, "items": [{ "item": "Pork Barbeque / PC (Without rice)", "price": "32" }, { "item": "Pork Barbeque / PC (Without rice)", "price": "32" }, { "item": "Pork Barbeque / PC (Without rice)", "price": "32" }, { "item": "Pork Barbeque / PC (Without rice)", "price": "32" }] }];
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        orders = orders.filter(order => order.date === today);
+
+        var ordersDiv = document.getElementById('orders');
+        var totalDiv = document.getElementById('total');
+        var itemsDiv = document.getElementById('items');
+
+        var totalSum = 0;
+        var itemsList = [];
+
+        orders.forEach(order => {
+            var orderContainer = document.createElement('div');
+            orderContainer.classList.add('order-container');
+
+            var dateElement = document.createElement('p');
+            dateElement.textContent = 'Date: ' + order.date;
+            orderContainer.appendChild(dateElement);
+
+            var totalPriceElement = document.createElement('p');
+            totalPriceElement.textContent = 'Total Price: ' + order.totalPrice;
+            orderContainer.appendChild(totalPriceElement);
+
+            var itemsElement = document.createElement('p');
+            itemsElement.textContent = 'Items: ';
+            order.items.forEach(item => {
+                itemsElement.textContent += item.item + ' (' + item.price + '), ';
+                itemsList.push(item.item);
+            });
+            itemsElement.textContent = itemsElement.textContent.slice(0, -2);
+            orderContainer.appendChild(itemsElement);
+
+            ordersDiv.appendChild(orderContainer);
+
+            totalSum += order.totalPrice;
+        });
+
+        totalDiv.textContent = `Total sum of all orders: ${totalSum} ₱`;
+    </script>
+
+</body>
+
+</html>
