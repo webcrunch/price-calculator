@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const anchors = document.getElementsByTagName('a');
     const domain = window.location.hostname;
     if (domain.includes("github.io")) { // Byt ut mot din GitHub Pages-domän
-        console.log("feoefjefojefoejofj")
         var repoName = 'webcrunch'; // Byt ut mot ditt repositoriums namn
         for (var i = 0; i < anchors.length; i++) {
             var anchor = anchors[i];
