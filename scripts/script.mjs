@@ -58,12 +58,26 @@ const displayButtions = () => {
 
 // Asynkron funktion för att hämta data från ett externt API
 async function fetchData() {
+    const anchors = document.getElementsByTagName('a');
+    const domain = window.location.hostname;
+
+    if (domain === 'github.io') { // Byt ut mot din GitHub Pages-domän
+        var repoName = 'YourRepoName'; // Byt ut mot ditt repositoriums namn
+        for (var i = 0; i < anchors.length; i++) {
+            var anchor = anchors[i];
+            if (anchor.pathname.startsWith('/')) {
+                anchor.pathname = '/' + repoName + anchor.pathname;
+            }
+        }
+    }
+
     try {
         const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
         const data = await response.json();
     } catch (error) {
         console.error('Det gick inte att hämta data:', error);
     }
+
     init()
 }
 
