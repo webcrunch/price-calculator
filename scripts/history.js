@@ -52,3 +52,18 @@ datumValjare.addEventListener('change', function () {
     // Uppdatera gränssnittet här baserat på det nya filtreradeOrders
     console.log('Det valda datumet är: ' + this.value);
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const anchors = document.getElementsByTagName('a');
+    const domain = window.location.hostname;
+    if (domain === 'github.io') { // Byt ut mot din GitHub Pages-domän
+        var repoName = 'YourRepoName'; // Byt ut mot ditt repositoriums namn
+        for (var i = 0; i < anchors.length; i++) {
+            var anchor = anchors[i];
+            if (anchor.pathname.startsWith('/')) {
+                anchor.pathname = '/' + repoName + anchor.pathname;
+            }
+        }
+    }
+});
