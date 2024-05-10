@@ -15,40 +15,38 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
     <script type="module" src="./scripts/script.mjs"></script>
     <script src="sw.js" defer></script>
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    <!-- <link rel="icon" type="image/x-icon" href="https://webcrunch.github.io/repository/icons/favicon.png"> -->
+    <link rel="icon" type="image/x-icon" href="icons/logo-favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://webcrunch.github.io/repository/icons/favicon.png">
+
 
 
 </head>
 
 <body>
-    <h1>Ns' Taste of Bacolod Menu</h1>
-    <div class="navbar">
-        <a href="/index.html">Home</a>
-        <a href="/history.html">History</a>
-    </div>
-
-    <div style="padding:16px">
-        <h3>Klicka på "Home" eller "History" för att navigera</h3>
-        <p>Obs: Lägg till dina egna länkdestinationer i href-attributet.</p>
-    </div>
-
-    <div class="container">
-        <div class="button-container" id="button-container">
+    <div>
+        <h1>Ns' Taste of Bacolod Menu</h1>
+        <div class="navbar">
+            <a href="/index.html">Home</a>
+            <a href="/history.html">History</a>
         </div>
 
+        <div class="container">
+            <div class="button-container" id="button-container">
+            </div>
 
-        <div class="button-container" id="order-list">
-            <h2>Item choosed:</h2>
-            <ul id="item-list"></ul>
-        </div>
 
-        <div class="button-container">
-            <p id="total">Total: 0 ₱</p>
-            Customer payment: <input type="number" id="customerPayment" />
-            <p id="change">Payment back to customer: 0 ₱</p>
-            <button id="clear">Clear order</button>
-            <button id="order"> Order</button>
+            <div class="button-container" id="order-list">
+                <h2>Item choosed:</h2>
+                <ul id="item-list"></ul>
+            </div>
+
+            <div class="button-container">
+                <p id="total">Total: 0 ₱</p>
+                Customer payment: <input type="number" id="customerPayment" />
+                <p id="change">Payment back to customer: 0 ₱</p>
+                <button id="clear">Clear order</button>
+                <button id="order"> Order</button>
+            </div>
         </div>
     </div>
 </body>
