@@ -84,7 +84,6 @@ async function fetchData() {
 
 const push = () => { }
 
-
 const init = () => {
 
     displayButtions()
@@ -98,24 +97,25 @@ const init = () => {
     });
 
     document.getElementById('order').addEventListener('click', async () => {
-        const savedData = JSON.parse(localStorage.getItem('OrderHistory'));
+        const savedData = JSON.parse(localStorage.getItem('OrderHistory')) || [];
         const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
-        savedArrayData.push({ date: new Date().toJSON().slice(0, 10), "totalPrice": totalPrice, "items": priceArray })
-        // console.log(savedArrayData, totalPrice, savedArrayData)
-        let addOrderHistoryArry;
-        // savedData !== null ? addOrderHistoryArry = [...savedArrayData, savedData] : addOrderHistoryArry = savedArrayData
 
-        console.log(JSON.stringify(savedArrayData))
+        const inputObj = {
+            date: new Date().toJSON().slice(0, 10),
+            "totalPrice": totalPrice,
+            "items": priceArray
+        }
+        savedData.push(inputObj);
         const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Sätt rätt Content-Type
             },
-            body: JSON.stringify(savedArrayData), // Konvertera data till JSON-sträng
+            body: JSON.stringify([inputObj]), // Konvertera data till JSON-sträng
         });
         if (response.ok) {
-            localStorage.setItem('OrderHistory', JSON.stringify(savedArrayData));
             console.log(response);
+            localStorage.setItem('OrderHistory', JSON.stringify(savedData));
         } else {
             console.error('Något gick fel');
         }
