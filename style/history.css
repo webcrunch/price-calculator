@@ -1,6 +1,9 @@
   body {
       background-color: rgb(242, 231, 216);
       font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+
   }
 
 
@@ -83,4 +86,20 @@
           display: block;
           text-align: center;
       }
+  }
+
+  .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #004669;
+      color: white;
+      text-align: center;
+      font-family: Tahoma, Arial;
+      font-size: 0.7em;
+      height: 4em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
   }

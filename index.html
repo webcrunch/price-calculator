@@ -24,16 +24,14 @@
 
 <body>
     <div>
-        <h1>Ns' Taste of Bacolod Menu</h1>
         <div class="navbar">
             <a href="/index.html">Home</a>
             <a href="/history.html">History</a>
         </div>
-
+        <h1>Ns' Taste of Bacolod Menu</h1>
         <div class="container">
             <div class="button-container" id="button-container">
             </div>
-
 
             <div class="button-container" id="order-list">
                 <h2>Item choosed:</h2>
@@ -42,7 +40,7 @@
 
             <div class="button-container">
                 <p id="total">Total: 0 ₱</p>
-                Customer payment: <input type="number" id="customerPayment" />
+                Customer payment: <input min="0" type="number" id="customerPayment" />
                 <p id="change">Payment back to customer: 0 ₱</p>
                 <button id="clear">Clear order</button>
                 <button id="order"> Order</button>
