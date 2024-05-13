@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="sv">
 
 <head>
-    <link rel="manifest" href="manifest.json" />
-    <meta name="description" content="This is an example of a meta description for pwa example.">
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="PWA Workshop" />
-    <meta name="apple-mobile-web-app-title" content="PWA Workshop" />
-    <meta name="msapplication-starturl" content="/index.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <link rel="stylesheet" href="style/history.css" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <script type="module" src="./scripts/history.js"></script>
-    <script src="sw.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is an example of a meta description for PWA example.">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="PWA Workshop">
+    <meta name="apple-mobile-web-app-title" content="PWA Workshop">
+    <meta name="msapplication-starturl" content="/index.html">
     <link rel="icon" type="image/x-icon" href="icons/logo-favicon.ico">
     <link rel="icon" type="image/x-icon" href="https://webcrunch.github.io/repository/icons/favicon.png">
-
-
-
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="style/history.css">
+    <script type="module" src="./scripts/history.js"></script>
+    <script src="sw.js" defer></script>
+    <title>Ns' Taste of Bacolod History</title>
 </head>
 
 <body>
-
-    <h1>Ns' Taste of Bacolod History</h1>
     <div class="navbar">
         <a href="/index.html">Home</a>
         <a href="/history.html">History</a>
     </div>
 
-    <!-- Datumväljare input -->
-    <input type="date" id="datumValjare" name="datum">
+    <content>
+        <h1>Ns' Taste of Bacolod History</h1>
 
-    <div id="orders"></div>
-    <div id="total"></div>
-    <div id="items"></div>
 
-    <script>
+        <!-- Datumväljare input -->
+        <input type="date" id="datumValjare" name="datum">
+        <div class="price-info"> <!-- Lägg till en klass för prisinformation -->
+            <div id="total"></div>
+            <div id="orders"></div>
+        </div>
 
-    </script>
-
+        <div id="items"></div>
+    </content>
+    <!-- <footer>
+        &copy; 2024 Ns' Taste of Bacolod
+    </footer> -->
 </body>
 
 </html>
