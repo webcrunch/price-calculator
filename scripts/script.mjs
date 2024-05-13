@@ -6,7 +6,6 @@ const itemList = document.getElementById('item-list');
 const paymentElement = document.getElementById('customerPayment');
 const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
-const savedArrayData = []
 const buttonArray_Fetch = []
 
 
@@ -72,8 +71,12 @@ async function fetchData() {
     }
 
     try {
-        const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
-        const data = await response.json();
+        const orderhistory = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistorys')
+        const fetchbuttons = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
+        const data = await fetchbuttons.json();
+        data.forEach(item => buttonArray_Fetch.push(item));
+        const data_orders = await orderhistory.json();
+        localStorage.setItem('OrderHistory', JSON.stringify(data_orders));
     } catch (error) {
         console.error('Det gick inte att hämta data:', error);
     }
@@ -81,13 +84,9 @@ async function fetchData() {
     init()
 }
 
-
-const push = () => { }
-
 const init = () => {
 
     displayButtions()
-
 
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', event => {
@@ -106,6 +105,7 @@ const init = () => {
             "items": priceArray
         }
         savedData.push(inputObj);
+
         const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistory', {
             method: 'POST',
             headers: {
@@ -114,14 +114,10 @@ const init = () => {
             body: JSON.stringify([inputObj]), // Konvertera data till JSON-sträng
         });
         if (response.ok) {
-            console.log(response);
             localStorage.setItem('OrderHistory', JSON.stringify(savedData));
         } else {
             console.error('Något gick fel');
         }
-        // const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
-
-        // let updateResult = await push()
         priceArray = []
         displayItemList()
     });
