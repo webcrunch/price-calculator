@@ -1,23 +1,57 @@
-const orders = JSON.parse(localStorage.getItem('OrderHistory')) || [];
 const ordersDiv = document.getElementById('orders');
 const totalDiv = document.getElementById('total');
 const itemsDiv = document.getElementById('items');
 // Sätt dagens datum som standardvärde för datumväljaren
 const datumValjare = document.getElementById('datumValjare');
 const today = new Date().toISOString().split('T')[0];
+let dateOfChoose;
 datumValjare.value = today;
-const totalAmount = orders.reduce((accumulator, currentOrder) => {
-    return accumulator + currentOrder.totalPrice;
-}, 0);
+
+
+const removeItemsFromArray = async (e) => {
+    if (e !== undefined) {
+        const response = await fetch(`https://backend-price.netlify.app/.netlify/functions/api/orderhistory/${e}`, {
+            method: 'DELETE'
+        })
+        if (response.ok) {
+            const updatedHistory = await response.json();
+            localStorage.removeItem("OrderHistory");
+            localStorage.setItem('OrderHistory', JSON.stringify(updatedHistory));
+            displayOrders(dateOfChoose)
+        } else {
+            console.error('Något gick fel');
+        }
+    }
+
+}
 
 
 const displayOrders = date => {
+    const orders = JSON.parse(localStorage.getItem('OrderHistory')) || [];
+    const totalAmount = orders.reduce((accumulator, currentOrder) => {
+        return accumulator + currentOrder.totalPrice;
+    }, 0);
+    dateOfChoose = date;
     ordersDiv.innerHTML = ''; // Töm innehållet
     const itemsList = [];
     let totalSum = 0;
     let filteredOrders = orders.filter(order => order.date === date);
     filteredOrders.forEach(order => {
+        const button = document.createElement('button');
+
+        // Sätt texten på knappen till 'name'
+        button.innerText = "remove order";
+
+        // Sätt värdet på knappen till 'price'
+        button.id = order._id;
+        // Lägg till en klass till knappen
+        button.classList.add('button');
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            removeItemsFromArray(this.id);
+        });
         const orderContainer = document.createElement('div');
+        orderContainer.appendChild(button);
         orderContainer.classList.add('order-container');
 
         const dateElement = document.createElement('p');

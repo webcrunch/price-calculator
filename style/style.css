@@ -26,6 +26,13 @@ body {
 
 h1 {
     text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+    color: #333;
+    /* Ändra färgen efter dina önskemål */
+    text-align: center;
+    text-transform: uppercase;
+    /* Lägg till andra stilar om du vill */
 }
 
 #clear {
