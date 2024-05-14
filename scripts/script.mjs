@@ -59,7 +59,6 @@ const displayButtions = () => {
 async function fetchData() {
     const anchors = document.getElementsByTagName('a');
     const domain = window.location.hostname;
-
     if (domain.includes("github.io")) { // Byt ut mot din GitHub Pages-domän
         var repoName = 'price-calculator'; // Byt ut mot ditt repositoriums namn
         for (var i = 0; i < anchors.length; i++) {
@@ -114,7 +113,8 @@ const init = () => {
             body: JSON.stringify([inputObj]), // Konvertera data till JSON-sträng
         });
         if (response.ok) {
-            localStorage.setItem('OrderHistory', JSON.stringify(savedData));
+            const orders = await response.json();
+            localStorage.setItem('OrderHistory', JSON.stringify(orders));
         } else {
             console.error('Något gick fel');
         }
