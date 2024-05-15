@@ -4,8 +4,12 @@
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
     '/',
+    '/index.html',
+    '/history.html',
     '/style/style.css',
-    '/scripts/script.js'
+    '/scripts/script.mjs',
+    '/style/history.css',
+    '/scripts/history.js'
 ];
 
 // Installera Service Worker och cacha alla nödvändiga filer
