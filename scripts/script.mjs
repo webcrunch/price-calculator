@@ -10,7 +10,7 @@ const buttonContainer = document.getElementById('button-container');
 
 const setPrice = () => {
     let total = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
-    totalElement.innerText = 'Totally: ' + total + " ₱";
+    totalElement.innerText = `Totally: ₱ ${total}`;
 }
 
 const removeItemsFromArray = (e) => {
@@ -133,7 +133,7 @@ const init = () => {
         let change = payment - totalPrice < 0 ? 0 : payment - totalPrice;
 
         // Uppdatera texten i det andra elementet
-        changeElement.textContent = 'Payment back to customer: ' + change + ' ₱';
+        changeElement.textContent = `Payment back to customer: ₱ ${change}`;
     });
 
     document.getElementById('clear').addEventListener('click', () => {
