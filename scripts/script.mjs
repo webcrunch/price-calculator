@@ -6,12 +6,11 @@ const itemList = document.getElementById('item-list');
 const paymentElement = document.getElementById('customerPayment');
 const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
-const buttonArray_Fetch = []
 
 
 const setPrice = () => {
     let total = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
-    totalElement.innerText = 'Totally: ' + total + " ₱";
+    totalElement.innerText = `Totally: ₱ ${total}`;
 }
 
 const removeItemsFromArray = (e) => {
@@ -34,9 +33,10 @@ const displayItemList = () => {
     setPrice()
 }
 
-const displayButtions = () => {
+const displayButtons = () => {
     // Loopa igenom arrayen
-    let buttonA = buttonArray_Fetch.length > 0 ? buttonArray_Fetch : buttonArray
+    const buttons = JSON.parse(localStorage.getItem('buttons'))
+    let buttonA = buttons.length > 0 ? buttons : buttonArray
     buttonA.forEach(item => {
         // Skapa en ny knapp
         const button = document.createElement('button');
@@ -68,24 +68,26 @@ async function fetchData() {
             }
         }
     }
-
-    try {
-        const orderhistory = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistorys')
-        const fetchbuttons = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
-        const data = await fetchbuttons.json();
-        data.forEach(item => buttonArray_Fetch.push(item));
-        const data_orders = await orderhistory.json();
-        localStorage.setItem('OrderHistory', JSON.stringify(data_orders));
-    } catch (error) {
-        console.error('Det gick inte att hämta data:', error);
+    const savedData = JSON.parse(localStorage.getItem('OrderHistory'))
+    const buttons = JSON.parse(localStorage.getItem('buttons'))
+    if (savedData == null || buttons == null) {
+        try {
+            const orderhistory = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistorys')
+            const fetchbuttons = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
+            const data = await fetchbuttons.json();
+            localStorage.setItem('buttons', JSON.stringify(data));
+            const data_orders = await orderhistory.json();
+            localStorage.setItem('OrderHistory', JSON.stringify(data_orders));
+        } catch (error) {
+            console.error('Det gick inte att hämta data:', error);
+        }
     }
-
     init()
 }
 
 const init = () => {
 
-    displayButtions()
+    displayButtons()
 
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', event => {
@@ -131,7 +133,7 @@ const init = () => {
         let change = payment - totalPrice < 0 ? 0 : payment - totalPrice;
 
         // Uppdatera texten i det andra elementet
-        changeElement.textContent = 'Payment back to customer: ' + change + ' ₱';
+        changeElement.textContent = `Payment back to customer: ₱ ${change}`;
     });
 
     document.getElementById('clear').addEventListener('click', () => {
