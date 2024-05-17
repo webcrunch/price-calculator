@@ -22,3 +22,13 @@ export const dataFetch = async () => {
     }
     return null;
 }
+
+export const fetchHistory = async () => {
+    try {
+        const orderhistory = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistorys')
+        const data_orders = await orderhistory.json();
+        localStorage.setItem('OrderHistory', JSON.stringify(data_orders));
+    } catch (error) {
+        console.error('Det gick inte att hämta data:', error);
+    }
+}

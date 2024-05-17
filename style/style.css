@@ -167,14 +167,6 @@ h1 {
     color: black;
 }
 
-@media screen and (max-width: 600px) {
-    .navbar a {
-        float: none;
-        display: block;
-        text-align: center;
-    }
-}
-
 .hidden {
     display: none;
 }
@@ -187,11 +179,11 @@ h1 {
 .loader {
 
     width: fit-content;
-    font-size: 20px;
+    font-size: 17px;
     font-family: monospace;
     line-height: 1.4;
     font-weight: bold;
-    padding: 50px 500px 50px;
+    padding: 30px 500px 50px;
     background: linear-gradient(#000 0 0) 0 0/100% 100% content-box padding-box no-repeat;
     position: relative;
     overflow: hidden;
@@ -266,5 +258,29 @@ h1 {
     80%,
     100% {
         transform: translateY(-260%);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .navbar a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+
+    .loader {
+        padding: 30px 300px 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+
+    .loader {
+        padding: 30px 100px 50px;
     }
 }

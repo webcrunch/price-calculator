@@ -1,4 +1,4 @@
-import { dataFetch } from "./fetchData.mjs";
+import { dataFetch, fetchHistory } from "./fetchData.mjs";
 const ordersDiv = document.getElementById('orders');
 const totalDiv = document.getElementById('total');
 const itemsDiv = document.getElementById('items');
@@ -7,6 +7,15 @@ const datumValjare = document.getElementById('datumValjare');
 const today = new Date().toISOString().split('T')[0];
 let dateOfChoose;
 datumValjare.value = today;
+
+
+
+const updateHistory = () => {
+    console.log("muuiuu")
+    fetchHistory()
+    displayOrders(dateOfChoose)
+}
+
 
 
 const removeItemsFromArray = async (e) => {
@@ -101,3 +110,4 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 });
+setInterval(updateHistory, 3600000);
