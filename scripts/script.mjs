@@ -1,5 +1,6 @@
 import { buttonArray } from "./arrays.mjs";
-let total = 0;
+import { dataFetch } from "./fetchData.mjs";
+
 let priceArray = []
 const totalElement = document.getElementById('total');
 const itemList = document.getElementById('item-list');
@@ -55,8 +56,8 @@ const displayButtons = () => {
     });
 }
 
-// Asynkron funktion för att hämta data från ett externt API
 async function fetchData() {
+    await dataFetch()
     const anchors = document.getElementsByTagName('a');
     const domain = window.location.hostname;
     if (domain.includes("github.io")) { // Byt ut mot din GitHub Pages-domän
@@ -68,27 +69,13 @@ async function fetchData() {
             }
         }
     }
-    const savedData = JSON.parse(localStorage.getItem('OrderHistory'))
-    const buttons = JSON.parse(localStorage.getItem('buttons'))
-    if (savedData == null || buttons == null) {
-        try {
-            const orderhistory = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistorys')
-            const fetchbuttons = await fetch('https://backend-price.netlify.app/.netlify/functions/api/buttons');
-            const data = await fetchbuttons.json();
-            localStorage.setItem('buttons', JSON.stringify(data));
-            const data_orders = await orderhistory.json();
-            localStorage.setItem('OrderHistory', JSON.stringify(data_orders));
-        } catch (error) {
-            console.error('Det gick inte att hämta data:', error);
-        }
-    }
+
     init()
 }
 
 const init = () => {
 
     displayButtons()
-
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', event => {
             priceArray.push({ "item": event.target.innerText, "price": event.target.value })

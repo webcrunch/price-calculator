@@ -1,3 +1,4 @@
+import { dataFetch } from "./fetchData.mjs";
 const ordersDiv = document.getElementById('orders');
 const totalDiv = document.getElementById('total');
 const itemsDiv = document.getElementById('items');
@@ -85,7 +86,8 @@ datumValjare.addEventListener('change', function () {
     displayOrders(this.value)
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
+    await dataFetch()
     displayOrders(datumValjare.value)
     const anchors = document.getElementsByTagName('a');
     const domain = window.location.hostname;
