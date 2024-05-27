@@ -9,9 +9,7 @@ let dateOfChoose;
 datumValjare.value = today;
 
 
-
 const updateHistory = () => {
-    console.log("muuiuu")
     fetchHistory()
     displayOrders(dateOfChoose)
 }
