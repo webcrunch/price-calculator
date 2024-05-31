@@ -1,6 +1,6 @@
 
 export const buttonArray = [
-    { "name": "Pechopak (without Rice)", "price": 120 },
+    { "name": "Pechopak (without Rice)", "price": 118 },
     { "name": "Pechopak (with Rice)", "price": 128 },
     { "name": "Paa (Without rice)", "price": 98 },
     { "name": "Paa (With rice)", "price": 108 },
