@@ -1,5 +1,6 @@
 import { buttonArray } from "./arrays.mjs";
 import { dataFetch } from "./fetchData.mjs";
+import { query_selector_handling } from './extern.mjs';
 
 let priceArray = []
 const totalElement = document.getElementById('total');
@@ -7,7 +8,12 @@ const itemList = document.getElementById('item-list');
 const paymentElement = document.getElementById('customerPayment');
 const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
-
+const checkbox = document.getElementById('change_date');
+const datumValjare = document.getElementById('datumValjare');
+const today = new Date().toISOString().split('T')[0];
+let dateOfChoose;
+datumValjare.value = today;
+datumValjare.setAttribute('max', today);
 
 const setPrice = () => {
     let total = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
@@ -83,15 +89,28 @@ const init = () => {
         });
     });
 
+    checkbox.addEventListener("change", function () {
+        if (this.checked) {
+            query_selector_handling(".show_datepicker").classList.remove("hidden")
+            query_selector_handling(".show_datepicker").classList.add('show')
+            datumValjare
+        } else {
+            query_selector_handling(".show_datepicker").classList.remove("show")
+            query_selector_handling(".show_datepicker").classList.add('hidden')
+        }
+    })
+
     document.getElementById('order').addEventListener('click', async () => {
         const savedData = JSON.parse(localStorage.getItem('OrderHistory')) || [];
         const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
 
+
         const inputObj = {
-            date: new Date().toJSON().slice(0, 10),
+            date: !checkbox.checked ? new Date().toJSON().slice(0, 10) : datumValjare.value,
             "totalPrice": totalPrice,
             "items": priceArray
         }
+
         savedData.push(inputObj);
 
         const response = await fetch('https://backend-price.netlify.app/.netlify/functions/api/orderhistory', {
