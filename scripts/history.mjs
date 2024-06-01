@@ -14,6 +14,10 @@ const updateHistory = () => {
     displayOrders(dateOfChoose)
 }
 
+const clear_cache = async () => {
+    window.localStorage.clear();
+    await dataFetch()
+}
 
 
 const removeItemsFromArray = async (e) => {
@@ -88,6 +92,8 @@ const displayOrders = date => {
     totalDiv.textContent = `Total sum of all orders: ${totalSum} ₱. Orders for all time is:  ${totalAmount} ₱`;
 
 }
+
+document.querySelector("#clear_cache").addEventListener("click", () => clear_cache())
 
 datumValjare.addEventListener('change', function () {
     displayOrders(this.value)
