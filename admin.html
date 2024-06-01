@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
     <link rel="stylesheet" href="style/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <script type="module" src="./scripts/script.mjs"></script>
+    <script type="module" src="./scripts/admin.mjs"></script>
     <script src="sw.js" defer></script>
     <link rel="icon" type="image/x-icon" href="icons/logo-favicon.ico">
     <link rel="icon" type="image/x-icon" href="https://webcrunch.github.io/repository/icons/favicon.png">
@@ -30,44 +30,43 @@
             <a href="/admin.html">admin</a>
         </div>
         <h1>Ns' Taste of Bacolod Menu</h1>
+        <h2>Add or update menu</h2>
         <div class="container">
             <div class="loader hidden"></div>
             <div class="button-container" id="button-container">
             </div>
 
             <div class="button-container" id="order-list">
-                <h2>Orders:</h2>
-                <ul id="item-list"></ul>
+
+
             </div>
 
             <div class="price-info">
-                <div">
-                    <input type="checkbox" id="change_date" name="change_date">
-                    <label for="change_date">Set another date for the order</label>
+
+                <div class=" show_datepicker hidden">
+                    <label for="datumValjare">Choose date:</label>
+                    <input type="date" id="datumValjare" name="datum">
+                </div>
+                <div class="showB add-menu">
+                    <h3>Add a menu button</h3>
+                    <label for="name">Menu name:</label>
+                    <input type="text" id="nameA" name="name"><br><br>
+                    <label for="price">Price:</label>
+                    <input type="number" min="0" id="priceA" name="price"><br><br>
+                    <button id="add-menu" class="my-button primary-button">Add menu</button>
+                </div>
+                <div class="update-menu hidden">
+                    <h3>Update a menu button</h3>
+                    <label for="name">Menu name:</label>
+                    <input type="text" id="nameU" name="name"><br><br>
+                    <label for="price">Price:</label>
+                    <input type="number" min="0" id="priceU" name="price"><br><br>
+                    <button id="add-menu" class="my-button primary-button">Update menu</button>
+                </div>
             </div>
-            <div class=" show_datepicker hidden">
-                <label for="datumValjare">Choose date:</label>
-                <input type="date" id="datumValjare" name="datum">
-            </div>
+
 
         </div>
-
-        <div class="button-container">
-            <div>
-                <p id="total">Total: ₱ 0 </p>
-                Customer payment: <input min="0" type="number" id="customerPayment" />
-                <p id="change">Change: ₱ 0 </p>
-            </div>
-            <div>
-                <button id="order" class="my-button primary-button">Order</button>
-                <button id="clear" class="my-button secondary-button">Clear</button>
-            </div>
-
-        </div>
-
-
-
-    </div>
     </div>
 </body>
 

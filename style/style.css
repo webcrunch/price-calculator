@@ -24,7 +24,8 @@ body {
 }
 
 
-h1 {
+h1,
+h2 {
     text-align: center;
     font-family: Arial, sans-serif;
     font-size: 2rem;
@@ -201,6 +202,10 @@ h1 {
 
 .show {
     display: grid;
+}
+
+.showB {
+    display: block;
 }
 
 /* HTML: <div class="loader"></div> */
