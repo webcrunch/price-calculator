@@ -176,6 +176,7 @@ h2 {
 /* NAVBAR CSS STYLE  */
 .navbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     overflow: hidden;
     background-color: #333;
@@ -189,11 +190,16 @@ h2 {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+
 }
 
 .navbar a:hover {
     background: #ddd;
     color: black;
+}
+
+.active {
+    background-color: #04AA6D;
 }
 
 .hidden {
@@ -208,7 +214,6 @@ h2 {
     display: block;
 }
 
-/* HTML: <div class="loader"></div> */
 .loader {
 
     width: fit-content;
@@ -315,5 +320,14 @@ h2 {
 
     .loader {
         padding: 30px 100px 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        flex-basis: 100%;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
     }
 }
