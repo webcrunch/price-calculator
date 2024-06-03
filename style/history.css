@@ -30,6 +30,7 @@
 
   .navbar {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       overflow: hidden;
       background-color: #333;
@@ -48,6 +49,10 @@
   .navbar a:hover {
       background: #ddd;
       color: black;
+  }
+
+  .active {
+      background-color: #04AA6D;
   }
 
   @media screen and (max-width: 600px) {
@@ -109,4 +114,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+  }
+
+  @media screen and (max-width: 500px) {
+      .navbar a {
+          flex-basis: 100%;
+          text-align: center;
+          padding: 10px;
+          box-sizing: border-box;
+      }
   }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="description" content="This is an example of a meta description for pwa example.">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="PWA Workshop" />
+    <meta name="apple-mobile-web-app-title" content="PWA Workshop" />
+    <meta name="msapplication-starturl" content="/index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <link rel="stylesheet" href="style/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <script type="module" src="./scripts/admin.mjs"></script>
+    <script src="sw.js" defer></script>
+    <link rel="icon" type="image/x-icon" href="icons/logo-favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://webcrunch.github.io/repository/icons/favicon.png">
+
+
+
+</head>
+
+<body>
+    <div>
+        <div class="navbar">
+            <a href="/index.html"><i class="fa fa-fw fa-home">Home</i> </a>
+            <a href="/history.html"><i class="fa fa-fw fa-home">History</i> </a>
+            <a href="/admin.html" class=" active"><i class="fa fa-fw fa-home">Admin</i> </a>
+
+        </div>
+        <h1>Ns' Taste of Bacolod Menu</h1>
+        <h2>Add or update menu</h2>
+        <div class="container">
+            <div class="loader hidden"></div>
+            <div class="button-container" id="button-container">
+            </div>
+
+            <div class="button-container" id="order-list">
+
+
+            </div>
+
+            <div class="price-info">
+
+                <div class=" show_datepicker hidden">
+                    <label for="datumValjare">Choose date:</label>
+                    <input type="date" id="datumValjare" name="datum">
+                </div>
+                <div class="showB add-menu">
+                    <h3>Add a menu button</h3>
+                    <label for="name">Menu name:</label>
+                    <input type="text" id="nameA" name="name"><br><br>
+                    <label for="price">Price:</label>
+                    <input type="number" min="0" id="priceA" name="price"><br><br>
+                    <button id="add-menu" class="my-button primary-button">Add menu</button>
+                </div>
+                <div class="update-menu hidden">
+                    <h3>Update a menu button</h3>
+                    <label for="name">Menu name:</label>
+                    <input type="text" id="nameU" name="name"><br><br>
+                    <label for="price">Price:</label>
+                    <input type="number" min="0" id="priceU" name="price"><br><br>
+                    <input type="hidden" id="id">
+                    <button id="update-menu" class="my-button primary-button">Update menu</button>
+                    <button id="delete-menu" class="my-button primary-button">delete menu</button>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+
+</html>

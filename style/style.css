@@ -24,7 +24,8 @@ body {
 }
 
 
-h1 {
+h1,
+h2 {
     text-align: center;
     font-family: Arial, sans-serif;
     font-size: 2rem;
@@ -175,6 +176,7 @@ h1 {
 /* NAVBAR CSS STYLE  */
 .navbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     overflow: hidden;
     background-color: #333;
@@ -188,11 +190,16 @@ h1 {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+
 }
 
 .navbar a:hover {
     background: #ddd;
     color: black;
+}
+
+.active {
+    background-color: #04AA6D;
 }
 
 .hidden {
@@ -203,7 +210,10 @@ h1 {
     display: grid;
 }
 
-/* HTML: <div class="loader"></div> */
+.showB {
+    display: block;
+}
+
 .loader {
 
     width: fit-content;
@@ -310,5 +320,14 @@ h1 {
 
     .loader {
         padding: 30px 100px 50px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        flex-basis: 100%;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
     }
 }
