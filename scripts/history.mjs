@@ -1,43 +1,16 @@
-import { dataFetch, fetchHistory } from "./fetchData.mjs";
 import { toggle } from './menu-handling.mjs';
+import { removeItemsFromArray, updateHistory, get_data, singleItemFromArray } from "./historyHandling.mjs"
 
 const ordersDiv = document.getElementById('orders');
 const totalDiv = document.getElementById('total');
-const itemsDiv = document.getElementById('items');
+const OrderDiv = document.getElementById('order');
+// const itemsDiv = document.getElementById('items');
+
 // Sätt dagens datum som standardvärde för datumväljaren
 const datumValjare = document.getElementById('datumValjare');
 const today = new Date().toISOString().split('T')[0];
 let dateOfChoose;
 datumValjare.value = today;
-
-
-const updateHistory = () => {
-    fetchHistory()
-    displayOrders(dateOfChoose)
-}
-
-const clear_cache = async () => {
-    window.localStorage.clear();
-    await dataFetch()
-}
-
-
-const removeItemsFromArray = async (e) => {
-    if (e !== undefined) {
-        const response = await fetch(`https://backend-price.netlify.app/.netlify/functions/api/orderhistory/${e}`, {
-            method: 'DELETE'
-        })
-        if (response.ok) {
-            const updatedHistory = await response.json();
-            localStorage.removeItem("OrderHistory");
-            localStorage.setItem('OrderHistory', JSON.stringify(updatedHistory));
-            displayOrders(dateOfChoose)
-        } else {
-            console.error('Något gick fel');
-        }
-    }
-
-}
 
 
 const displayOrders = date => {
@@ -47,10 +20,20 @@ const displayOrders = date => {
     }, 0);
     dateOfChoose = date;
     ordersDiv.innerHTML = ''; // Töm innehållet
+    OrderDiv.innerHTML = '';
     const itemsList = [];
     let totalSum = 0;
     let filteredOrders = orders.filter(order => order.date === date);
     filteredOrders.forEach(order => {
+        const buttonOrder = document.createElement('button');
+
+        // Sätt texten på knappen till 'name'
+        buttonOrder.innerText = "Change Order";
+
+        // Sätt värdet på knappen till 'price'
+        buttonOrder.id = order._id;
+        // Lägg till en klass till knappen
+        buttonOrder.classList.add('button');
         const button = document.createElement('button');
 
         // Sätt texten på knappen till 'name'
@@ -60,11 +43,18 @@ const displayOrders = date => {
         button.id = order._id;
         // Lägg till en klass till knappen
         button.classList.add('button');
+        buttonOrder.addEventListener('click', async function (event) {
+            event.preventDefault();
+            let a = await singleItemFromArray(this.id)
+            displayAOrder(a)
+        });
         button.addEventListener('click', function (event) {
             event.preventDefault();
             removeItemsFromArray(this.id);
+            displayOrders(dateOfChoose)
         });
         const orderContainer = document.createElement('div');
+        orderContainer.appendChild(buttonOrder)
         orderContainer.appendChild(button);
         orderContainer.classList.add('order-container');
 
@@ -95,6 +85,34 @@ const displayOrders = date => {
 
 }
 
+const displayAOrder = order => {
+    const buttonContainer = document.getElementById('button-container');
+    console.log(buttonContainer)
+    // const buttons = JSON.parse(localStorage.getItem('buttons'))
+    // let buttonA = buttons.length > 0 ? buttons : buttonArray
+    // buttonA.forEach(item => {
+    //     // Skapa en ny knapp
+    //     const button = document.createElement('button');
+
+    //     // Sätt texten på knappen till 'name'
+    //     button.innerText = item.name;
+
+    //     // Sätt värdet på knappen till 'price'
+    //     button.value = item.price;
+
+    //     // Lägg till en klass till knappen
+    //     button.classList.add('button');
+
+    //     // Lägg till knappen till container-elementet
+    //     buttonContainer.appendChild(button);
+    // });
+    const price = document.createElement('input');
+    price.value = order.totalPrice
+    ordersDiv.appendChild(price)
+
+}
+
+
 document.querySelector("#clear_cache").addEventListener("click", () => clear_cache())
 
 datumValjare.addEventListener('change', function () {
@@ -103,7 +121,7 @@ datumValjare.addEventListener('change', function () {
 
 document.addEventListener('DOMContentLoaded', async function () {
     toggle()
-    await dataFetch()
+    await get_data()
     displayOrders(datumValjare.value)
     const anchors = document.getElementsByTagName('a');
     const domain = window.location.hostname;
@@ -117,4 +135,5 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 });
+
 setInterval(updateHistory, 3600000);

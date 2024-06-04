@@ -53,6 +53,7 @@
   .navbar a:hover {
       background: #ddd;
       color: black;
+      padding: 15px 25px;
   }
 
   .active {
