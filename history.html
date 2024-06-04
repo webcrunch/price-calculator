@@ -17,19 +17,22 @@
     <script src="sw.js" defer></script>
     <link rel="icon" type="image/x-icon" href="icons/logo-favicon.ico">
     <link rel="icon" type="image/x-icon" href="https://webcrunch.github.io/repository/icons/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <title>Ns' Taste of Bacolod History</title>
 </head>
 
 <body>
+    <button id="toggle-menu">☰</button>
     <div class="navbar">
-        <a href="/index.html"><i class="fa fa-fw fa-home">Home</i> </a>
-        <a href="/history.html" class=" active"><i class="fa fa-fw fa-home">History</i> </a>
-        <a href="/admin.html"><i class="fa fa-fw fa-home">Admin</i> </a>
-
+        <a href="/index.html">Home<i class="fa fa-fw fa-home" style="margin-left: 5px;"></i> </a>
+        <a href="/history.html">History<i class="fas fa-history" style="margin-left: 5px;"></i> </a>
+        <a href="/admin.html" class=" active">Admin<i class="fa-brands fa-black-tie" style="margin-left: 5px;"></i>
+        </a>
     </div>
 
     <content>
-        <h1>Ns' Taste of Bacolod History<button id="clear_cache"></button></h1>
+        <h1>N's Taste of Bacolod History<button id="clear_cache"></button></h1>
 
         <input type="date" id="datumValjare" name="datum">
         <div class="loader hidden"></div>

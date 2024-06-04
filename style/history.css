@@ -1,8 +1,8 @@
   body {
       background-color: rgb(242, 231, 216);
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
+      /* display: flex;
+      flex-direction: column; */
 
   }
 
@@ -26,6 +26,10 @@
   #clear:hover {
       background-color: #d32f2f;
       /* Mörkröd */
+  }
+
+  #toggle-menu {
+      display: none;
   }
 
   .navbar {
@@ -120,7 +124,19 @@
       .navbar a {
           flex-basis: 100%;
           text-align: center;
-          padding: 10px;
+          padding: 15px;
           box-sizing: border-box;
+      }
+
+      #toggle-menu {
+          display: block;
+      }
+
+      .navbar {
+          display: none;
+      }
+
+      .show-menu {
+          display: block;
       }
   }
