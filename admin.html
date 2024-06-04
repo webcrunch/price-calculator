@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
     <link rel="stylesheet" href="style/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script type="module" src="./scripts/admin.mjs"></script>
     <script src="sw.js" defer></script>
     <link rel="icon" type="image/x-icon" href="icons/logo-favicon.ico">
@@ -23,14 +24,17 @@
 </head>
 
 <body>
-    <div>
+    <nav>
+        <button id="toggle-menu">☰</button>
         <div class="navbar">
-            <a href="/index.html"><i class="fa fa-fw fa-home">Home</i> </a>
-            <a href="/history.html"><i class="fa fa-fw fa-home">History</i> </a>
-            <a href="/admin.html" class=" active"><i class="fa fa-fw fa-home">Admin</i> </a>
-
+            <a href="/index.html">Home<i class="fa fa-fw fa-home" style="margin-left: 5px;"></i> </a>
+            <a href="/history.html">History<i class="fas fa-history" style="margin-left: 5px;"></i> </a>
+            <a href="/admin.html" class=" active">Admin<i class="fa-brands fa-black-tie" style="margin-left: 5px;"></i>
+            </a>
         </div>
-        <h1>Ns' Taste of Bacolod Menu</h1>
+    </nav>
+    <content>
+        <h1>N's Taste of Bacolod Menu</h1>
         <h2>Add or update menu</h2>
         <div class="container">
             <div class="loader hidden"></div>
@@ -68,10 +72,8 @@
 
                 </div>
             </div>
-
-
         </div>
-    </div>
+    </content>
 </body>
 
 </html>

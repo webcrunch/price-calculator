@@ -1,6 +1,7 @@
 import { buttonArray } from "./arrays.mjs";
 import { dataFetch } from "./fetchData.mjs";
 import { query_selector_handling } from './extern.mjs';
+import { toggle } from './menu-handling.mjs';
 
 let priceArray = []
 const totalElement = document.getElementById('total');
@@ -80,7 +81,7 @@ async function fetchData() {
 }
 
 const init = () => {
-
+    toggle()
     displayButtons()
     document.querySelectorAll('.button').forEach(button => {
         button.addEventListener('click', event => {

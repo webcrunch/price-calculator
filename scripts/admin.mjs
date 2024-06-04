@@ -1,7 +1,7 @@
 import { buttonArray } from "./arrays.mjs";
 import { dataFetch } from "./fetchData.mjs";
 import { query_selector_handling } from './extern.mjs';
-
+import { toggle } from './menu-handling.mjs';
 let priceArray = []
 const totalElement = document.getElementById('total');
 const itemList = document.getElementById('item-list');
@@ -9,30 +9,6 @@ const paymentElement = document.getElementById('customerPayment');
 const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
 
-// const setPrice = () => {
-//     let total = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
-//     totalElement.innerText = `Totally: ₱ ${total}`;
-// }
-
-// const removeItemsFromArray = (e) => {
-//     priceArray.splice(e, 1)
-//     displayItemList()
-// }
-
-// const displayItemList = () => {
-//     itemList.innerHTML = ""
-
-//     priceArray.map((item, i) => {
-//         const listItem = document.createElement('li');
-//         listItem.id = i
-//         listItem.innerText = item.item + " (" + item.price + ") ₱";
-//         listItem.addEventListener('click', function () {
-//             removeItemsFromArray(this.id);
-//         });
-//         itemList.appendChild(listItem);
-//     });
-//     setPrice()
-// }
 
 const displayButtons = () => {
     buttonContainer.innerHTML = ""
@@ -75,7 +51,7 @@ async function fetchData() {
 }
 
 const init = () => {
-
+    toggle()
     displayButtons()
 
     document.querySelectorAll('.button').forEach(button => {
@@ -93,20 +69,6 @@ const init = () => {
 
         });
     });
-
-
-
-
-    // checkbox.addEventListener("change", function () {
-    //     if (this.checked) {
-    //         query_selector_handling(".show_datepicker").classList.remove("hidden")
-    //         query_selector_handling(".show_datepicker").classList.add('show')
-    //         datumValjare
-    //     } else {
-    //         query_selector_handling(".show_datepicker").classList.remove("show")
-    //         query_selector_handling(".show_datepicker").classList.add('hidden')
-    //     }
-    // })
 
     document.getElementById('update-menu').addEventListener('click', async () => {
         const inputObj = {
@@ -199,23 +161,6 @@ const init = () => {
             query_selector_handling(".update-menu").classList.add('hidden')
         }
     });
-
-    // paymentElement.addEventListener('input', function () {
-    //     // Hämta värdena
-    //     const totalPrice = priceArray.reduce((sum, item) => sum + Number(item.price), 0);
-    //     let payment = parseInt(paymentElement.value);
-
-    //     // Utför beräkningen
-    //     let change = payment - totalPrice < 0 ? 0 : payment - totalPrice;
-
-    //     // Uppdatera texten i det andra elementet
-    //     changeElement.textContent = `Payment back to customer: ₱ ${change}`;
-    // });
-
-    // document.getElementById('clear').addEventListener('click', () => {
-    //     priceArray = []
-    //     displayItemList()
-    // });
 
 }
 

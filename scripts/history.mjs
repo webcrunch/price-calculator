@@ -1,4 +1,6 @@
 import { dataFetch, fetchHistory } from "./fetchData.mjs";
+import { toggle } from './menu-handling.mjs';
+
 const ordersDiv = document.getElementById('orders');
 const totalDiv = document.getElementById('total');
 const itemsDiv = document.getElementById('items');
@@ -100,6 +102,7 @@ datumValjare.addEventListener('change', function () {
 });
 
 document.addEventListener('DOMContentLoaded', async function () {
+    toggle()
     await dataFetch()
     displayOrders(datumValjare.value)
     const anchors = document.getElementsByTagName('a');
