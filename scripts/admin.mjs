@@ -2,13 +2,7 @@ import { buttonArray } from "./arrays.mjs";
 import { dataFetch } from "./fetchData.mjs";
 import { query_selector_handling } from './extern.mjs';
 import { toggle } from './menu-handling.mjs';
-let priceArray = []
-const totalElement = document.getElementById('total');
-const itemList = document.getElementById('item-list');
-const paymentElement = document.getElementById('customerPayment');
-const changeElement = document.getElementById('change');
 const buttonContainer = document.getElementById('button-container');
-
 
 const displayButtons = () => {
     buttonContainer.innerHTML = ""

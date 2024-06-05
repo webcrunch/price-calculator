@@ -37,17 +37,30 @@
         <input type="date" id="datumValjare" name="datum">
         <div class="loader hidden"></div>
         <div class="price-info"> <!-- Lägg till en klass för prisinformation -->
-            <div id="total"></div>
-            <div id="orders"></div>
+            <content>
+                <div id="total"></div>
+            </content>
+            <content>
+                <div id="orders"></div>
+            </content>
+
         </div>
 
         <!-- <div id="items"></div> -->
+        <content>
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="closeModal">&times;</span>
+                    <h2>Add Orders</h2>
+                    <!-- Lägg till fler knappar här -->
+                </div>
+            </div>
+            <div id="order">
 
-        <div id="order">
-            <div class="button-container" id="button-container"></div>
-        </div>
-    </content>
-    <!-- <footer>
+                <!-- <div class="button-container" id="button-container"></div> -->
+            </div>
+        </content>
+        <!-- <footer>
         &copy; 2024 Ns' Taste of Bacolod
     </footer> -->
 </body>
